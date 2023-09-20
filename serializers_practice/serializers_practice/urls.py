@@ -17,11 +17,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from serializers_app.views import get_all_records,get_records_by_id,create_records, update_record
+from serializers_app.views import UserList, UserList_id, add_data, AddUser
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('get_all_records/', get_all_records),
-    path('get_records_by_id/<int:id>/', get_records_by_id),
-    path('create_records/', create_records),
-    path('update_record/<int:id>/', update_record),
+    # path('get_all_records/', get_all_records),
+    # path('get_records_by_id/<int:id>/', get_records_by_id),
+    # path('create_records/', create_records),
+    # path('update_record/<int:id>/', update_record),
+    path('users/', UserList.as_view()),
+    path('users/<user_id>/', UserList_id.as_view()),
+    path('addUser/', AddUser.as_view())
+
 ]

@@ -3,3 +3,4 @@ from .models import user_details
 # Register your models here.
 
 admin.site.register(user_details)
+# admin.site.register(users_detail_child)
