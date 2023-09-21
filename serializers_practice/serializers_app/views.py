@@ -79,22 +79,22 @@ def add_data(request):
 
 
 class UserList(generics.ListAPIView):
-    queryset = user_details.objects.values()
+    queryset = user_details.objects.all()
     pagination_class = SetPaginationPagesize
     serializer_class= User_details_serialiser    
     filter_backends = [filters.SearchFilter]
     search_fields = ['username']
 
-    # def get_queryset(self):
-    #     queryset=user_details.objects.filter(id =1)
-    #     return queryset
     def get(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
-        page = self.paginate_queryset(queryset)        
+        page = self.paginate_queryset(queryset.values())        
         a = self.get_paginated_response(page)
-        return Response({"user_data":a})
-        # return Response({"user_data":a ,"b":2})
+        return Response(a)
         
+    # def get_queryset(self):
+    #     queryset=user_details.objects.all()
+    #     return queryset
+
         # queryset = self.get_queryset()
         # print(queryset.data)
         # pagicreateUsernator = SetPaginationPagesize()
@@ -102,10 +102,6 @@ class UserList(generics.ListAPIView):
         # serializer = User_details_serialiser(self.get_queryset, many=True)
         # res = {"total_data": len(self.get_queryset()), "data":serializer.data}
         # return Response(res)
-
-
-
-
 
     # def list(self, request):
 
@@ -116,14 +112,7 @@ class UserList(generics.ListAPIView):
     #     pagination_class = LimitOffsetPagination
     #     serializer = User_details_serialiser(queryset, many=True)
     #     res = {"total_data": len(queryset), "data":serializer.data}
-    #     return Response(res)
-
-
-   
-
-
-
-        
+    #     return Response(res)        
         # limit = int(request.query_params.get('limit', 10))
         # offset = int(request.query_params.get('offset', 0))
         # username = request.query_params.get('username')
