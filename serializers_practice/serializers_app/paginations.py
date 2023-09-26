@@ -12,7 +12,6 @@ class SetPaginationPagesize(PageNumberPagination):
 
     def get_paginated_response(self, data):
         response = Response(data)
-        print(response,11111111111111111)
         response['count'] = self.page.paginator.count
         response['next'] = self.get_next_link()
         response['previous'] = self.get_previous_link()

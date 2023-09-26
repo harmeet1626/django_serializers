@@ -4,7 +4,6 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from django.http import JsonResponse
 from django.forms.models import model_to_dict
-import json
 from .serializer import User_details_serialiser, createUser, Address_serialiser, get_User_details_serialiser
 from django.core.paginator import Paginator
 from django.contrib.auth.models import User
@@ -14,10 +13,37 @@ from serializers_app.paginations import SetPaginationPagesize,SetPaginationLimit
 from rest_framework import filters
 from django.core.paginator import Paginator
 from rest_framework.pagination import LimitOffsetPagination
+from rest_framework.permissions import IsAuthenticated
+from django.core.mail import send_mail
+from rest_framework.permissions import IsAuthenticated ,BasePermission ,AllowAny,IsAdminUser
+
+
+
+class PermissionByCondition(BasePermission):
+    def has_permission(self, request, view):
+        return True 
+    
+
+
+
+@api_view(['get', 'POST'])
+def sendMail(request):
+    try:
+        subject = 'Subject of your email'
+        message = 'This is the message body of your email.'
+        from_email = 'harmeet_singh1@softprodigy.com'  # Sender's email address
+        recipient_list = ['pratiksha_saluja@softprodigy.com']  # List of recipient email addresses
+        send_mail(subject, message, from_email, recipient_list, fail_silently=False, auth_user=None, auth_password=None, connection=None, html_message=None)
+        return Response("Email sent!!")
+    except Exception as E:
+        return Response(str(E))
 
 
 
 
+# @api_view(['get','post'])
+def homePage(request):
+    return render(request,'homePage.html')
 
 @api_view(['GET'])
 def get_all_records(request):
@@ -79,11 +105,13 @@ def add_data(request):
 
 
 class UserList(generics.ListAPIView):
+    # permission_classes = PermissionByCondition
     queryset = user_details.objects.all()
     pagination_class = SetPaginationPagesize
     serializer_class= User_details_serialiser    
     filter_backends = [filters.SearchFilter]
     search_fields = ['username']
+    # permission_classes = [IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())

@@ -14,7 +14,14 @@ SECRET_KEY = 'django-insecure-g&x(2l9(ywi7hz#1j1@^3g(=)*8h(ntbc^sbo$o(_r@s8=%e4#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'harmeet_singh1@softprodigy.com'  # Your Gmail email address
+EMAIL_HOST_PASSWORD = 'sdfl gcin kvrt ited' 
+
 
 
 # Application definition
@@ -27,13 +34,32 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'serializers_app'
+    'serializers_app',
+    'stripe_payment',
+    'rayzorpay_payment'
 ]
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 2,  # Number of items per page
-    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
 }
+
+
+STRIPE_PUBLISHABLE_KEY = 'pk_test_51Mg4qcSHH6lTciJepNZxG7YQJvNYcnXm58AXGOrt3hzfyPaxofrhn3LvVBfTzFmkgTh9DPG8AaHEzmjeNQ65FaCM00v5XlKKXf'
+STRIPE_SECRET_KEY = 'sk_test_51Mg4qcSHH6lTciJeaGNI4OHXueQleXieDaBKw4dQoPQWNBQMFOsplYfSTBVwdBStSJQLlFvFPphfFvIKUy3wAyyn008SW57vtP'
+
+
+RAZOR_KEY_ID = 'rzp_test_2tFW5rskhl54YT'
+RAZOR_KEY_SECRET = 'JHjMTXuiXWs7rQWN8vvQ8Ko7'
+
+# STATIC_URL = '/static/'
+
+# for django >= 3.1
+STATICFILES_DIRS = [BASE_DIR / 'static']
+
 
 
 APPEND_SLASH=False
@@ -54,7 +80,7 @@ ROOT_URLCONF = 'serializers_practice.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['template'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

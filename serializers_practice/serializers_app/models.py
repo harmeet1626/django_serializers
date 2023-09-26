@@ -19,3 +19,10 @@ class address(models.Model):
     PIN_code= models.IntegerField()
     class Meta:
         db_table = "address"
+
+class course(models.Model):
+    title = models.CharField(max_length=200)
+    created_on = models.CharField(max_length=200)
+    updated_on = models.CharField(max_length=200)
+    class Meta:
+        db_table = "course"

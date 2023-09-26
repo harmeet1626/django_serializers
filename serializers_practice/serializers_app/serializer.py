@@ -86,8 +86,3 @@ class createUser(serializers.ModelSerializer):
     #             raise serializers.ValidationError('User not active')    
     #         return data
 
-
-class profile:
-     pass
-
-   
