@@ -38,7 +38,10 @@ INSTALLED_APPS = [
     'stripe_payment',
     'rayzorpay_payment',
     'custom_commands',
-    'signals'
+    'signals',
+    'celery',
+    'celery_app',
+    'django_celery_beat',
 ]
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
@@ -47,6 +50,24 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
+}
+
+
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+  
+# set the celery result backend
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+  
+# set the celery timezone
+CELERY_TIMEZONE = 'UTC'
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("localhost", 6379)],
+        },
+    },
 }
 
 
