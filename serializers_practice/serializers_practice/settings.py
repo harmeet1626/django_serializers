@@ -36,7 +36,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'serializers_app',
     'stripe_payment',
-    'rayzorpay_payment'
+    'rayzorpay_payment',
+    'custom_commands',
+    'signals'
 ]
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',

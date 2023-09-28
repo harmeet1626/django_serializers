@@ -15,9 +15,8 @@ def homepage(request):
 	amount = 80000 # Rs. 200
 
 	# Create a Razorpay Order
-	razorpay_order = razorpay_client.order.create(dict(amount=amount,
-													currency=currency,
-													payment_capture='0'))
+	razorpay_order = razorpay_client.order.create(dict(amount=amount,currency=currency,payment_capture='0'))
+	
 
 	# order id of newly created order.
 	razorpay_order_id = razorpay_order['id']

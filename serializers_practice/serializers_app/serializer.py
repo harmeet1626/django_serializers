@@ -7,7 +7,7 @@ from .models import user_details, address
 class User_details_serialiser(serializers.ModelSerializer):
     class Meta:
         model = user_details
-        fields = ['username', 'first_name', 'last_name', 'gender', 'password','status']
+        fields = ['username', 'first_name', 'last_name', 'gender', 'password','status', 'myName']
         # fields = '__all__'
 
 

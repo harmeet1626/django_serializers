@@ -12,7 +12,7 @@ from rayzorpay_payment.views import paymenthandler, homepage
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('get_all_records/', get_all_records),
+    path('get_all_records/', get_all_records),
     # path('get_records_by_id/<int:id>/', get_records_by_id),
     # path('create_records/', create_records),
     # path('update_record/<int:id>/', update_record),

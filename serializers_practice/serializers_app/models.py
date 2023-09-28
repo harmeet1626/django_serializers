@@ -10,6 +10,12 @@ class user_details(models.Model):
     class Meta:
         db_table = "user_details"
 
+    # @property
+    # def myName(self):
+    #     a= address.objects.filter(PIN_code= 176061)
+    #     # return a.values()
+    #     return "Harmeet"
+
 
 
 class address(models.Model):
